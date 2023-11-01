@@ -1,0 +1,43 @@
+diff --git a/Esm/ib/src/linux/startup/Makefile b/Esm/ib/src/linux/startup/Makefile
+index ad23e67..00c7f2c 100644
+--- a/Esm/ib/src/linux/startup/Makefile
++++ b/Esm/ib/src/linux/startup/Makefile
+@@ -145,7 +145,7 @@ include $(TL_DIR)/Makerules/Maketargets.build
+ include $(TL_DIR)/Makerules/Maketargets.install
+ 
+ $(BUILDDIR)/opafmd: $(BUILDDIR)/opafmd.o
+-	$(VS)$(CC) -pthread $(LDFLAGS)$@ $(BUILDDIR)/opafmd.o $(LDLIBS)
++	$(VS)$(CC) -pie -pthread $(LDFLAGS)$@ $(BUILDDIR)/opafmd.o $(LDLIBS)
+ 
+ $(BUILDDIR)/opaxmlextract: $(PROJ_BIN_DIR)/opaxmlextract
+ 	cp $(PROJ_BIN_DIR)/opaxmlextract $(BUILDDIR)
+diff --git a/Esm/ib/src/linux/startup/fm_config/Makefile b/Esm/ib/src/linux/startup/fm_config/Makefile
+index c4108fa..cd3f301 100644
+--- a/Esm/ib/src/linux/startup/fm_config/Makefile
++++ b/Esm/ib/src/linux/startup/fm_config/Makefile
+@@ -150,10 +150,10 @@ include $(TL_DIR)/Makerules/Maketargets.build
+ include $(TL_DIR)/Makerules/Maketargets.install
+ 
+ $(BUILDDIR)/config_check: $(BUILDDIR)/config_check.o
+-	$(VS)$(CC) $(LDFLAGS)$@ $(BUILDDIR)/config_check.o $(LDLIBS)
++	$(VS)$(CC) -pie $(LDFLAGS)$@ $(BUILDDIR)/config_check.o $(LDLIBS)
+ 
+ $(BUILDDIR)/config_convert: $(BUILDDIR)/config_convert.o
+-	$(VS)$(CC) $(LDFLAGS)$@ $(BUILDDIR)/config_convert.o $(LDLIBS)
++	$(VS)$(CC) -pie $(LDFLAGS)$@ $(BUILDDIR)/config_convert.o $(LDLIBS)
+ 
+ # install for stage phase
+ #include $(TL_DIR)/Makerules/Maketargets.stage
+diff --git a/Makerules/Maketargets.build b/Makerules/Maketargets.build
+index ebf9fdf..9cd7844 100755
+--- a/Makerules/Maketargets.build
++++ b/Makerules/Maketargets.build
+@@ -127,7 +127,7 @@ else # BUILD_TARGET_OS is not VXWORKS
+ $(CMD_TARGETS_EXE) :	$(CT_OBJECTS) $(RSCOBJECTS) $(DEPLIBS_TARGETS)
+ 	@echo Linking executable...
+ 	@mkdir -p $(dir $@)
+-	$(VS)$(CC) $(LDFLAGS)$@ $(CT_OBJECTS) $(LDLIBS)
++	$(VS)$(CC) -pie $(LDFLAGS)$@ $(CT_OBJECTS) $(LDLIBS)
+ endif # BUILD_TARGET_OS is VXWORKS
+ endif # CMD_TARGETS_EXE non-null
+ 
