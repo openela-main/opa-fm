@@ -8,7 +8,7 @@
 
 Name: opa-fm
 Epoch: 1
-Version: 10.11.2.0.3
+Version: 10.12.1.0.6
 Release: 1%{?dist}
 Summary: Intel Omni-Path Fabric Management Software
 
@@ -85,6 +85,11 @@ chmod a-x %{buildroot}/%{_prefix}/share/opa-fm/opafm_src.xml
 %{_mandir}/man8/*
 
 %changelog
+* Fri Jun 02 2023 Kamal Heib <kheib@redhat.com> - 1:10.12.1.0.6-1
+- Update to upstream release 10.12.1.0.6
+- Add gating tests
+- Resolves: rhbz#2170633, rhbz#2159634
+
 * Wed Feb 08 2023 Michal Schmidt <mschmidt@redhat.com> - 10.11.2.0.3-1
 - Update to upstream version 10.11.2.0.3
 - Resolves: rhbz#2110931
